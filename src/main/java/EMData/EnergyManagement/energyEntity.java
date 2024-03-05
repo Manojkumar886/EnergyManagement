@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 public class energyEntity
 {
     @Id //primary key
-    private int Regno;
-    private String Username;
-    private String Password;
+    private int studentRegno;
+    private String studentUsername;
+    private String studentPassword;
     @Column(name = "mail_id")
-    private String Emailid;
-    private int Contactno;
+    private String studentMailid;
+    private Long studentContactno;
 
 }
