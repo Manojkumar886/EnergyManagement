@@ -1,9 +1,9 @@
 package EMData.EnergyManagement;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class energyController
@@ -19,5 +19,18 @@ public class energyController
     public String Creation(@RequestBody energyEntity mydetails)
     {
         return service.makecreate(mydetails).getStudentUsername()+" has been added successfully";
+    }
+    @GetMapping("/list")
+    public List<energyEntity>  List()
+    {
+        return  service.viewAll();
+    }
+
+    @PutMapping("/updating")
+    public String updating(@RequestBody energyEntity mydetails)
+    {
+        energyEntity temp=service.makecreate(mydetails);
+
+        return temp.getStudentUsername()+" has been updated successfully";
     }
 }
