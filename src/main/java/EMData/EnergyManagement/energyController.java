@@ -33,4 +33,15 @@ public class energyController
 
         return temp.getStudentUsername()+" has been updated successfully";
     }
+    @GetMapping("/readbyid/{regno}")
+    public energyEntity read(@PathVariable("regno")int regno)
+    {
+        return service.makeread(regno);
+    }
+
+    @DeleteMapping("/deletebyid/{regno}")
+    public String deleting(@PathVariable("regno")int regno)
+    {
+       return service.makedelete(regno)+" ";
+    }
 }

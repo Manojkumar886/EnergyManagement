@@ -20,4 +20,17 @@ public class energyService
     {
         return repo.findAll();
     }
+
+    public energyEntity makeread(int regno)
+    {
+        return repo.findById(regno).orElse(new energyEntity());
+    }
+
+    public String makedelete(int regno)
+    {
+        energyEntity temp=repo.findById(regno).orElse(new energyEntity());
+
+        repo.deleteById(regno);
+        return  temp.getStudentUsername()+"has been deleted successfully";
+    }
 }
