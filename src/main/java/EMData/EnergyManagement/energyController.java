@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//http://localhost:8080 suppose using req mappin4
+//http://localhost:8080/energymanagement/
 @RestController
+@RequestMapping("energymanagement")
 public class energyController
 {
     @Autowired
