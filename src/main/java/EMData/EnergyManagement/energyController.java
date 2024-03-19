@@ -1,6 +1,7 @@
 package EMData.EnergyManagement;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,19 +15,29 @@ public class energyController
     @Autowired
     energyService service;
 
+    @Autowired
+    PasswordEncoder encoder;
 //    url mappings (Post,put,get,delete)
 //    http://localhost:8080
 
+    @GetMapping("/{user}")
+    public energyEntity purpose(@PathVariable("user") String user)
+    {
+        energyEntity temp=(energyEntity) service.loadUserByUsername(user);
+        return temp;
+    }
 //    http://localhost:8080/create
     @PostMapping("/create")
     public String Creation(@RequestBody energyEntity mydetails)
     {
-        return service.makecreate(mydetails).getStudentUsername()+" has been added successfully";
+        String temp= encoder.encode(mydetails.getPassword());
+        mydetails.setPassword(temp);
+        return service.makecreate(mydetails).getUsername()+" has been added successfully";
     }
-    @GetMapping("/list")
-    public List<energyEntity>  List()
+    @GetMapping("/list/{user}")
+    public List<energyEntity>  List(@PathVariable("user")String user)
     {
-        return  service.viewAll();
+        return  service.viewAll(purpose(user));
     }
 
     @PutMapping("/updating")
@@ -34,7 +45,7 @@ public class energyController
     {
         energyEntity temp=service.makecreate(mydetails);
 
-        return temp.getStudentUsername()+" has been updated successfully";
+        return temp.getUsername()+" has been updated successfully";
     }
     @GetMapping("/readbyid/{regno}")
     public energyEntity read(@PathVariable("regno")int regno)

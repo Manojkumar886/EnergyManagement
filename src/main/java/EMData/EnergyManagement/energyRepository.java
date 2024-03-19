@@ -7,4 +7,9 @@ import org.springframework.stereotype.Repository;
 public interface energyRepository extends JpaRepository<energyEntity,Integer>
 {
 
+//    HQL-HIbernate Query Langauges
+    public energyEntity findByUsername(String registerno);
+
+
+
 }
