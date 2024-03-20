@@ -19,17 +19,17 @@ public class energyService implements UserDetailsService
     {
         return repo.save(mydetails);
     }
-    public List<energyEntity> viewAll(energyEntity purpose)
+    public List<energyEntity> viewAll()
     {
         return repo.findAll();
     }
 
-    public energyEntity makeread(int regno)
+    public energyEntity makeread(String regno)
     {
         return repo.findById(regno).orElse(new energyEntity());
     }
 
-    public String makedelete(int regno)
+    public String makedelete(String regno)
     {
         energyEntity temp=repo.findById(regno).orElse(new energyEntity());
 

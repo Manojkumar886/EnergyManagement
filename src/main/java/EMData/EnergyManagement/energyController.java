@@ -34,10 +34,10 @@ public class energyController
         mydetails.setPassword(temp);
         return service.makecreate(mydetails).getUsername()+" has been added successfully";
     }
-    @GetMapping("/list/{user}")
+    @GetMapping("/list")
     public List<energyEntity>  List(@PathVariable("user")String user)
     {
-        return  service.viewAll(purpose(user));
+        return  service.viewAll();
     }
 
     @PutMapping("/updating")
@@ -48,13 +48,13 @@ public class energyController
         return temp.getUsername()+" has been updated successfully";
     }
     @GetMapping("/readbyid/{regno}")
-    public energyEntity read(@PathVariable("regno")int regno)
+    public energyEntity read(@PathVariable("regno")String regno)
     {
         return service.makeread(regno);
     }
 
     @DeleteMapping("/deletebyid/{regno}")
-    public String deleting(@PathVariable("regno")int regno)
+    public String deleting(@PathVariable("regno")String regno)
     {
        return service.makedelete(regno)+" ";
     }
