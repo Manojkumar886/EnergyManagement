@@ -39,30 +39,29 @@ public class My_Authentication
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public InMemoryUserDetailsManager userallocation()
-//    {
-//        UserDetails user1= User.withUsername("vineth")
-//                            .password(encoder().encode("Vineth@123"))
-//                            .roles("Manager")
-//                            .build();
-//        UserDetails user2=User.withUsername("manoj")
-//                            .password(encoder().encode("Manoj@123"))
-//                            .roles("Assistant Manager")
-//                            .build();
-//        return new InMemoryUserDetailsManager(user1,user2);
-//    }
+    @Bean
+    public InMemoryUserDetailsManager userallocation()
+    {
+        UserDetails user1= User.withUsername("vineth")
+                            .password(encoder().encode("Vineth@123"))
+                            .roles("Manager")
+                            .build();
+        UserDetails user2=User.withUsername("manoj")
+                            .password(encoder().encode("Manoj@123"))
+                            .roles("Assistant Manager")
+                            .build();
+        return new InMemoryUserDetailsManager(user1,user2);
+    }
 
     @Bean
-    @Deprecated
     public SecurityFilterChain accessauthentication(HttpSecurity hp) throws Exception
     {
 //        hp.authorizeHttpRequests().anyRequest().authenticated(); any req to perform in current fil username ,password
-        hp.authorizeHttpRequests()
+        hp.authorizeRequests()
                 .requestMatchers("/energymanagement/**")
                         .authenticated();
-        hp.csrf().disable();//cross site request forgery
         hp.cors(); //cross -origin resource sharing
+        hp.csrf().disable();//cross site request forgery
         hp.httpBasic();
         hp.formLogin();
         AuthenticationManagerBuilder builder= hp.getSharedObject(AuthenticationManagerBuilder.class);

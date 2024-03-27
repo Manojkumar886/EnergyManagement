@@ -10,6 +10,7 @@ import java.util.List;
 //http://localhost:8080/energymanagement/
 @RestController
 @RequestMapping("energymanagement")
+@CrossOrigin(origins = "http://localhost:3000")
 public class energyController
 {
     @Autowired
@@ -34,8 +35,14 @@ public class energyController
         mydetails.setPassword(temp);
         return service.makecreate(mydetails).getUsername()+" has been added successfully";
     }
+
+    @GetMapping("/")
+    public void HELLO()
+    {
+        System.out.println(" WELCOME BACK ENERGY...!");
+    }
     @GetMapping("/list")
-    public List<energyEntity>  List(@PathVariable("user")String user)
+    public List<energyEntity>  List()
     {
         return  service.viewAll();
     }
