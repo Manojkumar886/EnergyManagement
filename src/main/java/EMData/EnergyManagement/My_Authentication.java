@@ -57,9 +57,13 @@ public class My_Authentication
     public SecurityFilterChain accessauthentication(HttpSecurity hp) throws Exception
     {
 //        hp.authorizeHttpRequests().anyRequest().authenticated(); any req to perform in current fil username ,password
+
         hp.authorizeRequests()
-                .requestMatchers("/energymanagement/**")
-                        .authenticated();
+                        .requestMatchers("/energymanagement/**")
+                                .authenticated();
+
+
+
         hp.cors(); //cross -origin resource sharing
         hp.csrf().disable();//cross site request forgery
         hp.httpBasic();

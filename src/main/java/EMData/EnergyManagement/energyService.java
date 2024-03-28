@@ -37,13 +37,12 @@ public class energyService implements UserDetailsService
         return  temp.getUsername()+"has been deleted successfully";
     }
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
-    {
-        energyEntity studentdetails=repo.findByUsername(username);
-        if(studentdetails==null)
-        {
+    public UserDetails loadUserByUsername(String username) {
+        energyEntity studentdetails = repo.findByUsername(username);
+        if (studentdetails == null) {
             throw new UsernameNotFoundException(" registration no is not found..!");
         }
+        ;
         return studentdetails;
     }
 }

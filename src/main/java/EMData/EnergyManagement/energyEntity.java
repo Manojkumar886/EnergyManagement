@@ -1,15 +1,15 @@
 package EMData.EnergyManagement;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -27,6 +27,15 @@ public class energyEntity implements UserDetails
     private String emailid;
     private Long contactno;
     private String roomno;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "allrecords",
+            joinColumns = @JoinColumn(name = "username"),
+            inverseJoinColumns = @JoinColumn(name = "serialno"))
+    @Nullable
+    @JsonBackReference
+    private Collection<managementdetails> myemdata
+            =new ArrayList<managementdetails>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

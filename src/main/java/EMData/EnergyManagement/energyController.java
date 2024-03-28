@@ -9,7 +9,7 @@ import java.util.List;
 //http://localhost:8080 suppose using req mappin4
 //http://localhost:8080/energymanagement/
 @RestController
-@RequestMapping("energymanagement")
+@RequestMapping("/energymanagement")
 @CrossOrigin(origins = "http://localhost:3000")
 public class energyController
 {
@@ -65,4 +65,18 @@ public class energyController
     {
        return service.makedelete(regno)+" ";
     }
+
+
+    @Autowired
+    managementService mserv;
+    @PostMapping("/linkCreate/{user}")
+    public managementdetails linkcreate(@PathVariable("user")String user,@RequestBody managementdetails mydatas)
+    {
+        energyEntity temp=purpose(user);
+        temp.getMyemdata().add(mydatas);
+        mydatas.setUserdetails(temp);
+        mserv.linkCreate(mydatas);
+        return  mydatas;
+    }
+
 }
