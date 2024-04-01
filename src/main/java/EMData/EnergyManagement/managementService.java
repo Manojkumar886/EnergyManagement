@@ -3,6 +3,8 @@ package EMData.EnergyManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class managementService
 {
@@ -15,6 +17,11 @@ public class managementService
         return mrepo.save(mydatas);
     }
 
+
+    public List<managementdetails> getbyuserdetails(energyEntity userdetails)
+    {
+        return  mrepo.findAllByUserdetails(userdetails);
+    }
 
 
 }

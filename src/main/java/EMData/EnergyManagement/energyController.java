@@ -69,14 +69,24 @@ public class energyController
 
     @Autowired
     managementService mserv;
-    @PostMapping("/linkCreate/{user}")
-    public managementdetails linkcreate(@PathVariable("user")String user,@RequestBody managementdetails mydatas)
+    @PostMapping("/linkCreate")
+    public managementdetails linkcreate(@RequestBody managementdetails mydatas)
     {
-        energyEntity temp=purpose(user);
+        energyEntity temp=mydatas.getUserdetails();
         temp.getMyemdata().add(mydatas);
         mydatas.setUserdetails(temp);
         mserv.linkCreate(mydatas);
         return  mydatas;
     }
 
+//    list url by one user
+
+    @GetMapping("/getall/{user}")
+    public List<managementdetails> listdatas(@PathVariable("user")String user)
+    {
+        energyEntity userdata=service.makeread(user);
+
+        return  mserv.getbyuserdetails(userdata);
+
+    }
 }
