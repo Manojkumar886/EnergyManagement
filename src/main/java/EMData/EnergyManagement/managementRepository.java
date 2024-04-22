@@ -6,11 +6,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface managementRepository extends JpaRepository<managementdetails,Integer>
+public interface managementRepository extends JpaRepository<managementdetails,String>
 {
 //    HQL
 
     public List<managementdetails> findAllByUserdetails(energyEntity userdetails);
 
-
+    public managementdetails findByTitle(String title);
 }

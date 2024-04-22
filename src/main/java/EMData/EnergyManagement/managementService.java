@@ -23,5 +23,16 @@ public class managementService
         return  mrepo.findAllByUserdetails(userdetails);
     }
 
+    public managementdetails getsingleurl(String title)
+    {
+        return  mrepo.findByTitle(title);
+    }
 
+    public String makeurldelete(String title)
+    {
+        managementdetails temp=mrepo.findById(title).orElse(new managementdetails());
+
+        mrepo.deleteById(title);
+        return  temp.getTitle()+"has been deleted successfully";
+    }
 }

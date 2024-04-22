@@ -13,8 +13,8 @@ import org.springframework.lang.Nullable;
 @Table(name = "emdata")
 public class managementdetails
 {
-    private String title;
     @Id
+    private String title;
     private String url;
     @ManyToOne
     @JoinColumn(name = "username")

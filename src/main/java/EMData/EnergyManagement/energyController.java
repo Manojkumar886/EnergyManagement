@@ -78,6 +78,12 @@ public class energyController
         mserv.linkCreate(mydatas);
         return  mydatas;
     }
+    @PutMapping("/linkUpdate")
+    public managementdetails linkupdate(@RequestBody managementdetails mydatas)
+    {
+        managementdetails temp=mserv.linkCreate(mydatas);
+        return  mydatas;
+    }
 
 //    list url by one user
 
@@ -87,6 +93,19 @@ public class energyController
         energyEntity userdata=service.makeread(user);
 
         return  mserv.getbyuserdetails(userdata);
-
     }
+
+    @GetMapping("/getoneurl/{title}")
+    public managementdetails readsingleurl(@PathVariable("title")String title)
+    {
+        return  mserv.getsingleurl(title);
+    }
+
+    @DeleteMapping("/deletebyurlid/{title}")
+    public String deletingservice(@PathVariable("title")String title)
+    {
+        System.out.println(title+" has been deleted");
+        return mserv.makeurldelete(title)+" ";
+    }
+
 }
